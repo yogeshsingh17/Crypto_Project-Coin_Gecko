@@ -8,8 +8,8 @@ export default {
     extend: {},
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("daisyui")], // Ensure require() is used properly in ES module
+  plugins: [require("daisyui")],
   daisyui: {
-    themes: ["forest"], // Correct syntax
+    themes: ["synthwave"],
   },
 };
