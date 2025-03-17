@@ -2,12 +2,12 @@ import { useState } from "react";
 import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "@tanstack/react-query";
 
-function CoinTable(){
+function CoinTable({ currency }){
 
     const [page, setPage] = useState(1);
     const {data, isLoading, isError, error, isFetching} = useQuery({
-        queryKey: ["coins", page],  // queryKey must be an array inside an object
-        queryFn: () => fetchCoinData(page, "usd"),  // queryFn inside the object
+        queryKey: ["coins", page, currency],  // queryKey must be an array inside an object
+        queryFn: () => fetchCoinData(page, currency),  // queryFn inside the object
         // retry : 2,
         // retryDelay : 1000,
         cacheTime : 1000 * 60 * 2,                  /* This will keep the data in cache memory to retrice the 
