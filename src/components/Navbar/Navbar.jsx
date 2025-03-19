@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import { CurrencyContext } from "../../context/CurrencyContext";
-// import currencyStore from '../../state/store'
+// import { useContext } from "react";
+// import { CurrencyContext } from "../../context/CurrencyContext";
+import currencyStore from '../../state/store'
 
 function Navbar(){
 
-    const { setCurrency } = useContext(CurrencyContext);        
+    // const { setCurrency } = useContext(CurrencyContext);        
                                                                 /* The useContext is going to return a value object
                                                                    which we passed inside the value prop of 
                                                                    provider component in App.jsx*/
                                                                 /* We can de-structure the value object. */
     
-    // const { setCurrency } = currencyStore();
+    const { setCurrency } = currencyStore();
 
     return (
         <>
