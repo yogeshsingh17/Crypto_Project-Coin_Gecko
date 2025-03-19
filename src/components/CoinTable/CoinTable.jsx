@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "@tanstack/react-query";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
-function CoinTable({ currency }){
+function CoinTable(){
+
+    const { currency } = useContext(CurrencyContext);
 
     const [page, setPage] = useState(1);
     const {data, isLoading, isError, error, isFetching} = useQuery({
         queryKey: ["coins", page, currency],  // queryKey must be an array inside an object
         queryFn: () => fetchCoinData(page, currency),  // queryFn inside the object
-        // retry : 2,
-        // retryDelay : 1000,
+        retry : 2,
+        retryDelay : 1000,
         cacheTime : 1000 * 60 * 2,                  /* This will keep the data in cache memory to retrice the 
                                                        data at high speed as an optimistic update for a better 
                                                        user experience. */
@@ -24,7 +27,7 @@ function CoinTable({ currency }){
     }
     if(isFetching)
     {
-        return <div>Is fetching</div>
+        return <div>Fetching data</div>
     }
 
     return (
