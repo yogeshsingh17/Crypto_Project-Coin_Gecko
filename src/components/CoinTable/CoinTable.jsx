@@ -3,12 +3,15 @@ import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "@tanstack/react-query";
 // import { CurrencyContext } from "../../context/CurrencyContext";
 import currencyStore from '../../state/store'
+import { useNavigate } from "react-router-dom";
 
 function CoinTable(){
 
     // const { currency } = useContext(CurrencyContext);
 
     const { currency } = currencyStore();
+
+    const navigate = useNavigate();
 
     const [page, setPage] = useState(1);
     const {data, isLoading, isError, error, isFetching} = useQuery({
@@ -33,6 +36,10 @@ function CoinTable(){
         return <div>Fetching data</div>
     }
 
+    function handleCoinRedirect(id){
+        navigate(`/details/${id}`)
+    }
+
     return (
         <>
             <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
@@ -55,7 +62,7 @@ function CoinTable(){
                     {isLoading && <div>Loading...</div>}
                     {data && data.map((coin) => {
                         return(
-                            <div key={coin.id} className="flex items-center justify-between w-full px-2 py-4 font-semibold text-white bg-transparent">
+                            <div onClick={() => handleCoinRedirect(coin.id)} key={coin.id} className="flex items-center justify-between w-full px-2 py-4 font-semibold text-white bg-transparent cursor-pointer">
                                 <div className="flex items-center justify-start gap-3 basis-[35%]">
                                     
                                     <div className="h-[5rem] w-[5rem]">
