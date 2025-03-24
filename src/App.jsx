@@ -10,7 +10,7 @@ function App(){
   return (
     <>
       {/* <CurrencyContext.Provider value={ {currency, setCurrency} }> */}
-        <Home />
+        {/* <Home /> */}
       {/* </CurrencyContext.Provider> */}
     </>
   )
