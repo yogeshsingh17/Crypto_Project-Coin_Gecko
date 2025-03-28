@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 // import { CurrencyContext } from "../../context/CurrencyContext";
 import currencyStore from '../../state/store'
 import { useNavigate } from "react-router-dom";
+import MyLoader from "../PageLoader/PageLoader";
 
 function CoinTable(){
 
@@ -31,9 +32,9 @@ function CoinTable(){
     {
         return <div>Error : {error.message}</div>
     }
-    if(isFetching)
+    if(isLoading)
     {
-        return <div>Fetching data</div>
+        return <MyLoader />     /* MyLoader will be displayed during th einitial render of the page by using isLoading state. */
     }
 
     function handleCoinRedirect(id){
@@ -81,7 +82,7 @@ function CoinTable(){
                                 </div>
                                 
                                 <div className="basis-[25%]">
-                                    {coin.current_price}
+                                    { isFetching ? <MyLoader /> : coin.current_price}       {/*MyLoader will be displayed to the user while updated price is being fetched for a particular coin*/}
                                 </div>
 
                                 <div className="basis-[20%]">
