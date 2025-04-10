@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "../../pages/Layout";
 import { lazy, Suspense } from "react";
-// import ContentLoader, { Facebook } from "react-content-loader";
-// import PageLoader from "../PageLoader/PageLoader";
 import MyLoader from "../PageLoader/PageLoader";
 import CustomErrorBoundary from "../CustomErrorBoundary/CustomErrorBoundary";
 

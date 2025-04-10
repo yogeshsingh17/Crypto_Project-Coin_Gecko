@@ -24,5 +24,9 @@ export const chartDays = [
     {
         label: '365 Days',
         value: 365
+    },
+    {
+        label: 'All time',
+        value: 'max'
     }
 ]

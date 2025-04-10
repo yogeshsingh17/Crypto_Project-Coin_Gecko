@@ -1,16 +1,8 @@
-// import { useContext } from "react";
-// import { CurrencyContext } from "../../context/CurrencyContext";
 import { useNavigate } from 'react-router-dom';
 import currencyStore from '../../state/store'
 import { useState } from 'react';
 
 function Navbar(){
-
-    // const { setCurrency } = useContext(CurrencyContext);        
-                                                                /* The useContext is going to return a value object
-                                                                   which we passed inside the value prop of 
-                                                                   provider component in App.jsx*/
-                                                                /* We can de-structure the value object. */
     
     const { setCurrency } = currencyStore();
 
@@ -21,7 +13,7 @@ function Navbar(){
 
     function goToHome(){
         navigate('/')
-    }
+    } 
 
     return (
         <>
@@ -52,19 +44,23 @@ function Navbar(){
                         </ul>
                     </div>
                 </div>
+                
                 <div onClick={goToHome} className="navbar-center">
                     <a className="text-xl btn btn-ghost">Crypto Tracker</a>
                 </div>
+                
                 <div className="navbar-end">
-                    <div className="flex border border-orange-400">
+                    <div className="flex items-center gap-2 transition-all duration-300">
                         {isSearchVisible && (
-                            /* Input Search Bar */
-                            <input 
-                                type="search" 
-                                placeholder='search' 
-                                className="w-64 p-2 border rounded"
-                                onChange={console.log("Change has been made")}              //api implementation should be done here.
-                            />
+                            <div>
+                                {/* Input Search Bar */}
+                                <input 
+                                    type="search" 
+                                    placeholder='search' 
+                                    className="w-64 p-2 transition-all duration-300 border rounded-md bg-base-200"
+                                    onChange={() => {console.log("Changes have been made in search bar")}}              //api implementation should be done here.
+                                />
+                            </div>
                         )}
                         <button 
                             /* Search Icon */

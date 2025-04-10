@@ -1,0 +1,6 @@
+									Homework
+
+Create a search functionality for search button.
+a input box should appear whe we click on the search button.
+Whenever we search a cryptocurrency we get a list of suggestions in the dropdown.
+We have to be smart enough to make sure we do not make an api call every time we type a letter in the search bar.

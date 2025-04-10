@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import currencyStore from '../state/store'
 import { useQuery } from '@tanstack/react-query';
-import fetchCoinHistoricData from '../services/fetchCoinHistoricData'
+import { fetchCoinHistoricData } from '../services/fetchCoinHistoricData'
 
 function useFetchCoinHistory(coinId){
     const { currency } = currencyStore();
@@ -15,11 +15,11 @@ function useFetchCoinHistory(coinId){
     const {data : historicData, isLoading, isError} = useQuery({
         queryKey : ['coinHistoricData', coinId, currency, days, interval],
         queryFn : () => fetchCoinHistoricData(coinId, interval, days, currency),
-        catchTime : 1000*60*2,
+        cacheTime : 1000*60*2,
         staleTime : 1000*60*2,
     });
 
-    return (
+    return {
         historicData,
         isLoading,
         isError,
@@ -27,7 +27,7 @@ function useFetchCoinHistory(coinId){
         setCoinInterval,
         days,
         currency
-    )
+    }
 }
 
 export default useFetchCoinHistory;

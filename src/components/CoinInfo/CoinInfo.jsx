@@ -6,9 +6,9 @@ import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto"
 import { chartDays } from "../../helpers/constants";
 
-function CoinInfo({ historicData, setDays, setCoinInterval, days, currency }){
+Chart.register(CategoryScale);
 
-    Chart.register(CategoryScale);
+function CoinInfo({ historicData, setDays, setCoinInterval, days, currency }){
     
     if(!historicData){
         return <Alert message="No historic data available" type="info"/>
@@ -17,13 +17,13 @@ function CoinInfo({ historicData, setDays, setCoinInterval, days, currency }){
     function handleDayChange(e){
         console.log(Number(e.target.value));
         const daysSelected = e.target.value;
-        if(daysSelected == 1){
-            setCoinInterval('');
+        if(daysSelected == 1){  
+            setCoinInterval?.('');
         }
         else{
-            setCoinInterval('daily');
+            setCoinInterval?.('daily');
         }
-        setDays(Number(e.target.value));
+        setDays?.(Number(e.target.value));
     }
     
     return (
@@ -35,13 +35,13 @@ function CoinInfo({ historicData, setDays, setCoinInterval, days, currency }){
                     data={{
                         labels: historicData.prices.map(coinPrice => {
                             let date = new Date(coinPrice[0]);       //Converting UNIX timestamp to date.
-                            let time = date.getHours() > 12 ? `${date.getHours() - 12}:${date.getMinutes()} PM` : 
-                            `${date.getHours()}:${date.getMinutes()} AM`;
+                            let time = date?.getHours() > 12 ? `${date?.getHours() - 12}:${date?.getMinutes()} PM` : 
+                            `${date?.getHours()}:${date?.getMinutes()} AM`;
                             return days === 1 ? time : date.toLocaleDateString();
                         }),
                         datasets: [                     //The dataset array takes an object.
                             {
-                                label: `Price (Past ${days} ${days === 1 ? 'Day' : 'Days'}) in ${currency.toUpperCase()}`,
+                                label: `Price (Past ${days} ${days === 1 ? 'Day' : 'Days'}) in ${currency?.toUpperCase()}`,
                                 data: historicData.prices.map(coinPrice => coinPrice[1])
                             }
                         ],

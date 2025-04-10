@@ -1,29 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { fetchCoinDetails } from "../services/fetchCoinDetails";
-import { useEffect } from "react";
 import parse from 'html-react-parser';
-import currencyStore from '../state/store';
 import MyLoader from "../components/PageLoader/PageLoader";
 import CoinInfoContainer from "../components/CoinInfo/CoinInfoContainer";
+import useFetchCoin from "../hooks/useFetchCoin";
 
 function CoinDetailsPage(){
 
-    const {coinId} = useParams();           /*useParam is a hook provided by react router to allow us to access
-                                              the dynamic URL. */
+    const { coinId } = useParams();
 
-    const { currency } = currencyStore();   /*Using curencyStore from store to get the updated currency in the UI*/
-
-    const {isError, isLoading, data: coin} = useQuery({
-        queryKey: ["coin", coinId],
-        queryFn: () => fetchCoinDetails(coinId),
-        cacheTime: 1000*60*2,
-        staleTime: 1000*60*2,
-    }); 
-
-    useEffect(() => {
-        console.log(coin);
-    }, [coin]);
+    const {isLoading, isError, coin, currency} = useFetchCoin(coinId);
 
     if(isLoading){
         return <MyLoader/>
